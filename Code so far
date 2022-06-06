@@ -1,0 +1,53 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MaterialApp(
+  home: Home(),
+));
+
+class Home extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+          title: const Text('my first app'),
+          centerTitle: true,
+          backgroundColor: Colors.red[600]
+      ),
+      body: Row(
+        children:  <Widget>[
+          Expanded(
+            child: Text('Hello World', textAlign: TextAlign.center,),
+          ),
+          Expanded(
+
+            child: Text('Craft beautiful UIs', textAlign: TextAlign.center),
+
+          ),
+          Expanded(
+            child: FittedBox(
+              fit: BoxFit.contain, // otherwise the logo will be tiny
+              child: FlutterLogo(),
+
+            ),
+
+          ),
+          Container(
+            color: Colors.cyan,
+            padding: EdgeInsets.all(30.0),
+            child: Text('click me', textAlign: TextAlign.center,)
+
+          )
+
+        ],
+      ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.red[600],
+          onPressed: () {},
+          child: const Text('click'),
+        )
+
+
+    );
+  }
+}
+
