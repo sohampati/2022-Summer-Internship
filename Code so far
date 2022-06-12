@@ -1,53 +1,156 @@
+
 import 'package:flutter/material.dart';
 
-void main() => runApp(MaterialApp(
-  home: Home(),
-));
 
-class Home extends StatelessWidget {
+
+
+void main() {
+  runApp(const MaterialApp(
+    home: NinjaCard(),
+  ));
+}
+
+class NinjaCard extends StatefulWidget {
+  const NinjaCard({Key? key}) : super(key: key);
+
+  @override
+  State<NinjaCard> createState() => _NinjaCardState();
+}
+
+class _NinjaCardState extends State<NinjaCard> {
+  int ninjaLevel = 0;
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[850],
       appBar: AppBar(
-          title: const Text('my first app'),
-          centerTitle: true,
-          backgroundColor: Colors.red[600]
+        title: Text('Ninja ID Card'),
+        centerTitle: true,
+        backgroundColor: Colors.cyan[400],
+        elevation: 0,
       ),
-      body: Row(
-        children:  <Widget>[
-          Expanded(
-            child: Text('Hello World', textAlign: TextAlign.center,),
-          ),
-          Expanded(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState((){
+            ninjaLevel += 1;
+          });
 
-            child: Text('Craft beautiful UIs', textAlign: TextAlign.center),
-
-          ),
-          Expanded(
-            child: FittedBox(
-              fit: BoxFit.contain, // otherwise the logo will be tiny
-              child: FlutterLogo(),
+        },
+        child: Icon(Icons.add),
+        backgroundColor: Colors.grey[800],
+      ),
+      body: Padding(
+        padding: EdgeInsets.fromLTRB(30, 40, 30, 0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(
+              child: CircleAvatar(
+                backgroundImage: NetworkImage('https://wallpaperaccess.com/full/4129901.jpg'),
+                radius: 40.0,
+              ),
 
             ),
+            Divider(
+              height: 40.0,
+              color: Colors.grey[500],
+            ),
+            Text(
+              'NAME',
+              style: TextStyle(
+                color: Colors.red,
+                letterSpacing: 2.0,
 
-          ),
-          Container(
-            color: Colors.cyan,
-            padding: EdgeInsets.all(30.0),
-            child: Text('click me', textAlign: TextAlign.center,)
 
-          )
 
-        ],
+              ),
+            ),
+            SizedBox(height: 10.0),
+            Text(
+              'Itachi Uchiha',
+              style: TextStyle(
+                color: Colors.amberAccent[200],
+                letterSpacing: 2.0,
+                fontSize: 28.0,
+                fontWeight: FontWeight.bold,
+
+
+
+              ),
+            ),
+            SizedBox(height: 30.0),
+            Text(
+              'Current Ninja Level',
+              style: TextStyle(
+                color: Colors.red,
+                fontSize: 14.0,
+                letterSpacing: 2.0,
+
+
+
+              ),
+            ),
+            SizedBox(height: 10.0),
+            Text(
+              '$ninjaLevel',
+              style: TextStyle(
+                color: Colors.amberAccent[200],
+                letterSpacing: 2.0,
+                fontSize: 28.0,
+                fontWeight: FontWeight.bold,
+
+
+
+              ),
+            ),
+            SizedBox(height: 30.0),
+            Row(
+
+
+              children: [
+
+                Icon(
+                  Icons.email,
+                  color: Colors.grey[400],
+
+                ),
+                SizedBox(width: 38.0),
+                Text(
+
+                  'hateuchiha@strongestclan.com',
+                  style:TextStyle(
+                    color: Colors.grey[400],
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1.0,
+
+                  ),
+
+                ),
+
+
+              ],
+            ),
+
+
+
+
+
+
+
+
+
+
+
+          ],
+        ),
       ),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.red[600],
-          onPressed: () {},
-          child: const Text('click'),
-        )
-
-
     );
   }
 }
+
+
+
+
 
