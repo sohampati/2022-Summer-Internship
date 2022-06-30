@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-
+import 'world_time.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 class Loading extends StatefulWidget {
   @override
   _LoadingState createState() => _LoadingState();
@@ -10,27 +9,42 @@ class Loading extends StatefulWidget {
 
 class _LoadingState extends State<Loading> {
 
-  void getData() async {
-    var response = await http.get(Uri.parse("https://jsonplaceholder.typicode.com/todos/1"));
-    // print(response.body);
-    Map data = jsonDecode(response.body);
-    print(data);
-    print(data['title']);
-
+  void SetupWorldTime() async{
+    WorldTime instance = WorldTime(location: 'Berlin', flag: 'germany.png', url: 'Europe/London');
+    await instance.getTime();
+    Navigator.pushReplacementNamed(context, '/home', arguments: {
+      'location': instance.location,
+      'flag': instance.flag,
+      'time': instance.time,
+      'isDayTime': instance.isDayTime
+    });
   }
+
+
+
 
   @override
   void initState() {
     super.initState();
-    getData();
+    SetupWorldTime();
   }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+
       child: Scaffold(
-        body: Text('loading screen'),
+backgroundColor: Colors.blue[900],
+        body: Center(
+          child: SpinKitFadingCircle(
+            color: Colors.white,
+            size: 50.0,
+          ),
+
+        ),
+
       ),
+
     );
   }
 }
