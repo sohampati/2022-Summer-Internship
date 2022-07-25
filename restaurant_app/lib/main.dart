@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/details.dart';
 import 'package:restaurant_app/profile.dart';
+import 'package:restaurant_app/restaurant_card.dart';
 
-void main(){
-  runApp(RestaurantApp());
+void main() {
+  runApp(const RestaurantApp());
 }
 
 class RestaurantApp extends StatelessWidget {
@@ -11,12 +14,11 @@ class RestaurantApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'UberEats Sim',
       home: DetailPage(),
     );
-
   }
 }
 
@@ -41,21 +43,24 @@ class _HomePageState extends State<HomePage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Discover',
+                      Text(
+                        'Discover',
                         style: TextStyle(
                           fontSize: 50,
                           fontWeight: FontWeight.bold,
-
                         ),
                       ),
                       GestureDetector(
-                          onTap: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=> ProfilePage()));
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ProfilePage()));
                           },
-                          child: CircleAvatar(backgroundImage: NetworkImage('https://images.iphonephotographyschool.com/23057/1120/food.jpg')))
-
+                          child: CircleAvatar(
+                              backgroundImage: NetworkImage(
+                                  'https://images.iphonephotographyschool.com/23057/1120/food.jpg')))
                     ],
-
                   ),
                   SizedBox(height: 20),
                   Container(
@@ -75,111 +80,74 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            SizedBox(height: .5,),
+            SizedBox(
+              height: .5,
+            ),
             Container(
-              child: Expanded(child: ListView(
-                children: [
-                  buildItem('Madras Chettinaad', '526 reviews - 4305 State Bridge Rd', 'https://cdn.vox-cdn.com/thumbor/aNM9cSJCkTc4-RK1avHURrKBOjU=/1400x1400/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/20059022/shutterstock_1435374326.jpg', 4.0),
-                  buildItem('Persis Biryani', '147 reviews - 631 N Main St ', 'https://s3-media0.fl.yelpcdn.com/bphoto/Tq1B1lcTFtWgipcfnVAYUQ/o.jpg', 4.0),
-                  buildItem('Mayuri Indian Grill', '63 reviews - 5354 McGinnis Ferry Rd', 'https://s3-media0.fl.yelpcdn.com/bphoto/lbPSDfUizeoruPa_hGKncQ/o.jpg', 4.5),
-
-                ],
-              ),),
+              child: Expanded(
+                child: ListView(
+                  children: [
+                    RestaurantCard(
+                      title: 'Madras Chettinaad',
+                      subTitle: '526 reviews - 4305 State Bridge Rd',
+                      url:
+                          'https://cdn.vox-cdn.com/thumbor/aNM9cSJCkTc4-RK1avHURrKBOjU=/1400x1400/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/20059022/shutterstock_1435374326.jpg',
+                      rating: 4.0,
+                      onTap: () {
+                        log("Welcome to Madras Chettinaad");
+                      },
+                    ),
+                    RestaurantCard(
+                      title: 'Persis Biryani',
+                      subTitle: '147 reviews - 631 N Main St ',
+                      url:
+                          'https://s3-media0.fl.yelpcdn.com/bphoto/Tq1B1lcTFtWgipcfnVAYUQ/o.jpg',
+                      rating: 4.0,
+                      onTap: () {
+                        log("Welcome to Persis Biryani");
+                      },
+                    ),
+                    RestaurantCard(
+                      title: 'Mayuri Indian Grill',
+                      subTitle: '63 reviews - 5354 McGinnis Ferry Rd',
+                      url:
+                          'https://s3-media0.fl.yelpcdn.com/bphoto/lbPSDfUizeoruPa_hGKncQ/o.jpg',
+                      rating: 4.5,
+                      onTap: () {
+                        log("Welcome to  Mayuri Indian Grill");
+                      },
+                    ),
+                    // RestaurantCard(
+                    //     'Mayuri Indian Grill',
+                    //     '63 reviews - 5354 McGinnis Ferry Rd',
+                    //     'https://s3-media0.fl.yelpcdn.com/bphoto/lbPSDfUizeoruPa_hGKncQ/o.jpg',
+                    //     4.5),
+                  ],
+                ),
+              ),
             )
           ],
         ),
       ),
     );
-
   }
-  buildItem(String title, String subTitle, String url, double rating){
-    return InkWell(
 
-      child: Container(
-
-        margin: EdgeInsets.symmetric(vertical: 10),
-        padding: EdgeInsets.symmetric(horizontal: 25),
-          child: Column(
-
-            children: [
-
-              Container(
-
-                height: 200,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage(url),
-                    fit: BoxFit.cover,
-                  ),
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    topRight: Radius.circular(10)
-                  )
-                ),
-
-              ),
-
-              Container(
-
-                padding: EdgeInsets.all(25),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(10),
-                    bottomRight: Radius.circular(10),
-                  ),
-                  boxShadow: [
-                    BoxShadow(blurRadius: 2.0,
-                    spreadRadius: 1.0,
-                    color: Colors.grey,)
-                  ]
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(title,style: TextStyle(
-                          fontWeight: FontWeight.bold,fontSize: 16),
-                        ),
-                        Text(subTitle, style: TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 12, color: Colors.grey
-                        ),)
-                      ],
-                    ),
-                    CircleAvatar(backgroundColor: Colors.orange, child: Text(rating.toString(), style: TextStyle(
-                      color: Colors.white
-                    ),),)
-                  ],
-                ),
-              )
-            ],
-          ),
-      ),
-      onTap: (){
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context)=> DetailPage())
-        );
-      },
-    );
-  }
+  buildItem(String title, String subTitle, String url, double rating,
+      Function() onClicked) {}
 
   buildTopChip(String label, bool isActive) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 5,),
-
+      padding: EdgeInsets.symmetric(
+        horizontal: 5,
+      ),
       child: Chip(
         padding: EdgeInsets.all(8),
         label: Text(
           label,
-          style: TextStyle(color: Colors.black,fontSize: 16),
-
+          style: TextStyle(color: Colors.black, fontSize: 16),
         ),
         backgroundColor: isActive ? Colors.orange : Colors.grey,
       ),
     );
   }
 }
-

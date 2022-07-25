@@ -18,7 +18,7 @@ class _ProfilePageState extends State<ProfilePage> {
       backgroundColor: Colors.white,
       elevation: 0,
       actions: [
-        IconButton(onPressed: onPressed, icon: icon)
+        // IconButton(onPressed: (){}, icon: icon)
       ],
     );
   }
